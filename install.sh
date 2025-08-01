@@ -27,9 +27,14 @@ mkdir -p /mnt/boot/efi
 mount ${DISK}1 /mnt/boot/efi
 
 # Install base system
+echo ">>> Cleaning pacman cache and initializing keyring..."
+rm -rf /var/cache/pacman/pkg/*
+pacman-key --init
+pacman-key --populate archlinux
+pacman -Sy
+
 echo ">>> Installing base system..."
-pacstrap /mnt base linux linux-firmware sudo grub efibootmgr networkmanager \
-        plasma kde-applications ly kitty dolphin firefox neovim btop mpv code
+pacstrap /mnt base linux linux-firmware sudo grub efibootmgr networkmanager
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab

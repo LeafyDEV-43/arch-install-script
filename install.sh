@@ -29,7 +29,7 @@ mount ${DISK}1 /mnt/boot/efi
 # Install base system
 echo ">>> Installing base system..."
 pacstrap /mnt base linux linux-firmware sudo grub efibootmgr networkmanager \
-        plasma kde-applications ly kitty dolphin firefox neovim btop mpv neofetch code
+        plasma kde-applications ly kitty dolphin firefox neovim btop mpv code
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab

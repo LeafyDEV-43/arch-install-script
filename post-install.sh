@@ -7,7 +7,7 @@ PASSWORD="$2"
 echo ">>> Updating system and installing GUI packages..."
 pacman -Syu --noconfirm
 pacman -S --noconfirm plasma kde-applications ly kitty dolphin firefox \
-    neovim btop mpv code neofetch
+    neovim btop mpv code 
 
 echo ">>> Creating user and setting password..."
 useradd -m -G wheel "$USERNAME"

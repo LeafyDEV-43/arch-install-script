@@ -2,9 +2,6 @@
 # post-install.sh -- Runs inside chroot
 set -e
 
-USERNAME="$1"
-PASSWORD="$2"
-
 echo ">>> Updating system and installing GUI packages..."
 pacman -Syu --noconfirm
 pacman -S --noconfirm plasma kde-applications ly kitty dolphin firefox \
@@ -21,21 +18,22 @@ locale-gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 # Hostname and hosts
-echo "$USERNAME-PC" > /etc/hostname
-cat <<EOF > /etc/hosts \
+echo "drakie-PC" > /etc/hostname
+
+cat > /etc/hosts <<EOF
 127.0.0.1       localhost
 ::1             localhost
-127.0.1.1       $USERNAME-PC.localdomain $USERNAME-PC
+127.0.1.1       drakie-PC.localdomain drakie-PC
 EOF
 
 # Root password
 echo ">>> Setting root password..."
-echo "root:$PASSWORD" | chpasswd
+echo "root:Lun@r4eva" | chpasswd
 
 # Create user
-echo ">>> Creating user $USERNAME..."
-useradd -m -G wheel -s /bin/bash "$USERNAME"
-echo "$USERNAME:$PASSWORD" | chpasswd
+echo ">>> Creating user drakie..."
+useradd -m -G wheel -s /bin/bash drakie
+echo "drakie:1347" | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 # Enable services
@@ -46,11 +44,11 @@ systemctl set-default graphical.target
 
 # Bootloader
 echo ">>> Installing GRUB bootloader..."
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=StarNova
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Fix home permissions
-chown -R "$USERNAME:$USERNAME" /home/"$USERNAME"
+chown -R drakie:drakie /home/drakie
 
 echo ">>> Post-install complete! Ready to reboot."
 exit

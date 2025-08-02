@@ -3,8 +3,6 @@
 set -e
 
 DISK="/dev/sda"
-USERNAME="drakie"
-PASSWORD="1347"
 
 # Time to party!
 echo ">>> Setting time..."
@@ -44,7 +42,7 @@ cp post-install.sh /mnt/root/
 chmod +x /mnt/root/post-install.sh
 
 # Chroot & finish
-arch-chroot /mnt /root/post-install.sh "$USERNAME" "$PASSWORD"
+arch-chroot /mnt /root/post-install.sh
 
 # Cleanup
 rm /mnt/root/post-install.sh

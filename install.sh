@@ -2,7 +2,7 @@
 # install.sh -- Run this inside the Arch ISO
 set -e
 
-DISK="/dev/sda"
+DISK="/dev/nvme0n1"
 
 # Time to party!
 echo ">>> Setting time..."
